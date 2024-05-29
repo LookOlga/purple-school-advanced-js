@@ -1,5 +1,6 @@
-
 'use strict'
+
+// 1-map
 
 const arr = [
     {id: 8, name: 'Вася'},
@@ -13,10 +14,8 @@ const arr = [
 
 const IDs = [...new Set(arr.map(item => item.id))]
 const res = IDs.map(id => arr.find(item => item.id === id))
-<<<<<<< Updated upstream
-=======
 
-// Math random task
+// 2-dice
 
 const throwDice = (dice) => {
     const diceTypes = ['D4', 'D6', 'D8', 'D10', 'D12', 'D16', 'D20']
@@ -29,13 +28,12 @@ const throwDice = (dice) => {
     return Math.round(Math.random() * (max - min + 1) + min)
 }
 
+// 3-birthday
 
+const validateAge = (birthday) => {
+    const currentYear = new Date().getFullYear()
+    const birthdayYear = new Date(birthday).getFullYear()
 
-const date = new Date()
-const options = {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric'
+    console.log(currentYear)
+    console.log(birthdayYear)
 }
-console.log(new Intl.DateTimeFormat('en-US', options).format(date))
->>>>>>> Stashed changes

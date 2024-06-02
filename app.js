@@ -31,9 +31,16 @@ const throwDice = (dice) => {
 // 3-birthday
 
 const validateAge = (birthday) => {
-    const currentYear = new Date().getFullYear()
-    const birthdayYear = new Date(birthday).getFullYear()
+    const legalAge = 18
+    const currentDate = new Date()
+    const birthdayDate = new Date(birthday)
 
-    console.log(currentYear)
-    console.log(birthdayYear)
+    let age = currentDate.getFullYear() - birthdayDate.getFullYear();
+
+    if (currentDate.getMonth() < birthdayDate.getMonth() || 
+        (currentDate.getMonth() === birthdayDate.getMonth() && currentDate.getDate() < birthdayDate.getDate())) {
+        age--;
+    }
+
+    return age >= legalAge;
 }

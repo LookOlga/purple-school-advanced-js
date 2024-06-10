@@ -13,3 +13,29 @@ const arr = [
 
 const IDs = [...new Set(arr.map(item => item.id))]
 const res = IDs.map(id => arr.find(item => item.id === id))
+
+// 6-class
+
+class Car {
+    #run
+    #model
+    #brand
+
+    constructor({run, model, brand}) {
+        this.#run = run
+        this.#model = model
+        this.#brand = brand
+    }
+
+    get run() {
+        return this.#run
+    }
+
+    set run(value) {
+        this.#run = value
+    }
+
+    info() {
+        console.log(`Brand: ${this.#brand}, Model: ${this.#model}, Run: ${this.#run}`)
+    }
+}

@@ -21,6 +21,7 @@ const Ork = function({weapon, ...properties}) {
 }
 
 Ork.prototype = addPersonageAsPrototype()
+Ork.prototype.constructor = Ork
 
 Ork.prototype.beat = function() {
     console.log(`Beat with ${this.weapon}`)
@@ -32,6 +33,7 @@ const Elf = function(spellType, ...properties) {
 }
 
 Elf.prototype = addPersonageAsPrototype()
+Elf.prototype.constructor = Elf
 
 Elf.prototype.spell = function() {
     console.log(`Spell ${this.spellType}`)

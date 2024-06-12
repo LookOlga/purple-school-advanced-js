@@ -3,24 +3,24 @@
 
 // 5-oop
 
-const Personage = function ({race, name, language}) {
+const Character = function ({race, name, language}) {
     this.race = race
     this.name = name
     this.language = language
 }
 
-Personage.prototype.speak = function() {
+Character.prototype.speak = function() {
     console.log(`${this.name} speaks in ${this.language}`)
 }
 
-const addPersonageAsPrototype = () => Object.create(Personage.prototype)
+const addCharacterAsPrototype = () => Object.create(Character.prototype)
 
 const Ork = function({weapon, ...properties}) {
-    Personage.call(this, properties)   
+    Character.call(this, properties)   
     this.weapon = weapon
 }
 
-Ork.prototype = addPersonageAsPrototype()
+Ork.prototype = addCharacterAsPrototype()
 Ork.prototype.constructor = Ork
 
 Ork.prototype.beat = function() {
@@ -28,11 +28,11 @@ Ork.prototype.beat = function() {
 }
 
 const Elf = function(spellType, ...properties) {
-    Personage.call(this, properties)    
+    Character.call(this, properties)    
     this.spellType = spellType
 }
 
-Elf.prototype = addPersonageAsPrototype()
+Elf.prototype = addCharacterAsPrototype()
 Elf.prototype.constructor = Elf
 
 Elf.prototype.spell = function() {

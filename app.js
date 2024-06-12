@@ -29,7 +29,7 @@ const setTimer = () => {
         }, {})
 
         timerContainer.textContent = `${endDateMonth - formattedCurrentDateParts.month} months 
-        ${daysLeft - timeShift} days
+        ${daysLeft} days
         ${24 - formattedCurrentDateParts.hour - timeShift} hours
         ${60 - formattedCurrentDateParts.minute - timeShift} minutes
         ${60 - formattedCurrentDateParts.second} seconds`

@@ -8,16 +8,17 @@ const uniqueseById = (arr) => {
 }
 
 // 2-dice
-
+const MIN = 1
+const EXTRA_NUMBER_TO_INCLUDE_MAX = 1
 const throwDice = (dice) => {
     const diceTypes = ['D4', 'D6', 'D8', 'D10', 'D12', 'D16', 'D20']
     
-    if(!diceTypes.includes(dice)) return `Unsupported diceType: ${dice}`
+    if (!diceTypes.includes(dice)) return `Unsupported diceType: ${dice}`
 
     const max = Number(dice.replace(/[a-zA-Z]/g, ''))
-    const min = 1
+   
 
-    return Math.round(Math.random() * (max - min + 1) + min)
+    return Math.round(Math.random() * (max - MIN + EXTRA_NUMBER_TO_INCLUDE_MAX) + MIN)
 }
 
 // 3-birthday

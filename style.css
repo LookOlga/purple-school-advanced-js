@@ -1,0 +1,33 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+.timer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #333;
+    color: #fff;
+    padding: 15px;
+}
+
+.timer-content {
+    font-size: 36px;
+    font-weight: 700;
+    text-align: center;
+}
+
+@media screen and (min-width: 1024px) {
+    .timer-content {
+        max-width: 900px;
+        font-size: 60px;
+        font-weight: 800;
+    }
+}

@@ -161,7 +161,6 @@ const getAbilityDescription = (event) => {
 
 const getPokemonAbilityURL = (event) => {
     const response = JSON.parse(event.target.response)
-    console.log('res', response)
     const abilityItem = response.abilities && response.abilities.length ? response.abilities[0] : {}
     return abilityItem?.ability?.url
 }

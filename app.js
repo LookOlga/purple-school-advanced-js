@@ -146,3 +146,29 @@ class Car {
         console.log(`Brand: ${this.#brand}, Model: ${this.#model}, Run: ${this.#run}`)
     }
 }
+
+// 10-pokemon-promise
+
+const BASE_URL = 'https://pokeapi.co/api/v2/'
+const language = 'en'
+
+const getPokemonData = (url, errorMessage, method = 'GET') => {
+    return fetch(url, {
+        method
+    }).then(response => {
+        if(!response.ok) throw new Error(`${errorMessage}: ${response.status}`)
+        return response.json()
+    })
+}
+
+getPokemonData(`${BASE_URL}pokemon/ditto`, 'Cannot get pokemon data')
+    .then(data => {
+        const { url } = data.abilities[0].ability
+        return getPokemonData(url, 'Cannot get pokemon description data')
+    })
+    .then(result => {
+        const engDescription = result.effect_entries.find(item => item.language.name === language).effect
+        console.log(engDescription)
+    }).catch(error => {
+        return error
+    })

@@ -146,3 +146,43 @@ class Car {
         console.log(`Brand: ${this.#brand}, Model: ${this.#model}, Run: ${this.#run}`)
     }
 }
+
+// 9-pokemon
+
+const BASE_URL = 'https://pokeapi.co/api/v2/'
+const language = 'en'
+
+const getAbilityDescription = (event) => {
+    const result = JSON.parse(event.target.response)
+    const engDescription = result.effect_entries.find(item => item.language.name === language).effect
+    if(!engDescription) return
+    console.log(engDescription)
+}
+
+const getPokemonAbilityURL = (event) => {
+    const response = JSON.parse(event.target.response)
+    console.log('res', response)
+    const abilityItem = response.abilities && response.abilities.length ? response.abilities[0] : {}
+    return abilityItem?.ability?.url
+}
+
+const loadPokemonDescription = () => {
+    const xhr = new XMLHttpRequest()
+    xhr.open('GET', `${BASE_URL}pokemon/ditto`)
+    xhr.send()
+    xhr.addEventListener('load', function(firstEvent) {
+        const abilityURL = getPokemonAbilityURL(firstEvent)
+        if(!abilityURL) return
+        xhr.open('GET', abilityURL)
+        xhr.send()
+        xhr.addEventListener('load', getAbilityDescription)
+    })
+}
+
+loadPokemonDescription()
+
+
+
+
+
+

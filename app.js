@@ -179,9 +179,3 @@ const loadPokemonDescription = () => {
 }
 
 loadPokemonDescription()
-
-
-
-
-
-

@@ -156,7 +156,7 @@ const getPokemonData = (url, errorMessage, method = 'GET') => {
     return fetch(url, {
         method
     }).then(response => {
-        if(!response.ok) throw new Error(`${errorMessage}: ${response.status}`)
+        if(!response.ok) return new Error(`${errorMessage}: ${response.status}`)
         return response.json()
     })
 }

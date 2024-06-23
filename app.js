@@ -13,11 +13,11 @@ const MIN = 1
 const EXTRA_NUMBER_TO_INCLUDE_MAX = 1
 const throwDice = (dice) => {
     const diceTypes = ['D4', 'D6', 'D8', 'D10', 'D12', 'D16', 'D20']
-
+    
     if (!diceTypes.includes(dice)) return `Unsupported diceType: ${dice}`
 
     const max = Number(dice.replace(/[a-zA-Z]/g, ''))
-
+   
 
     return Math.round(Math.random() * (max - MIN + EXTRA_NUMBER_TO_INCLUDE_MAX) + MIN)
 }
@@ -31,7 +31,7 @@ const validateAge = (birthday) => {
 
     let age = currentDate.getFullYear() - birthdayDate.getFullYear();
 
-    if (currentDate.getMonth() < birthdayDate.getMonth() ||
+    if (currentDate.getMonth() < birthdayDate.getMonth() || 
         (currentDate.getMonth() === birthdayDate.getMonth() && currentDate.getDate() < birthdayDate.getDate())) {
         age--;
     }
@@ -85,60 +85,50 @@ setTimer()
 
 // 5-oop
 
-const Character = function ({
-    race,
-    name,
-    language
-}) {
+const Character = function ({race, name, language}) {
     this.race = race
     this.name = name
     this.language = language
 }
 
-Character.prototype.speak = function () {
+Character.prototype.speak = function() {
     console.log(`${this.name} speaks in ${this.language}`)
 }
 
 const addCharacterAsPrototype = () => Object.create(Character.prototype)
 
-const Ork = function ({
-    weapon,
-    ...properties
-}) {
-    Character.call(this, properties)
+const Ork = function({weapon, ...properties}) {
+    Character.call(this, properties)   
     this.weapon = weapon
 }
 
 Ork.prototype = addCharacterAsPrototype()
 Ork.prototype.constructor = Ork
 
-Ork.prototype.beat = function () {
+Ork.prototype.beat = function() {
     console.log(`Beat with ${this.weapon}`)
 }
 
-const Elf = function (spellType, ...properties) {
-    Character.call(this, properties)
+const Elf = function(spellType, ...properties) {
+    Character.call(this, properties)    
     this.spellType = spellType
 }
 
 Elf.prototype = addCharacterAsPrototype()
 Elf.prototype.constructor = Elf
 
-Elf.prototype.spell = function () {
+Elf.prototype.spell = function() {
     console.log(`Spell ${this.spellType}`)
 }
 
 // 6-class
 
 class Car {
-    #run 
-    #model 
+    #run
+    #model
     #brand
-    constructor({
-        run,
-        model,
-        brand
-    }) {
+
+    constructor({run, model, brand}) {
         this.#run = run
         this.#model = model
         this.#brand = brand

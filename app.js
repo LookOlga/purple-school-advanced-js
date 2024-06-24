@@ -146,3 +146,37 @@ class Car {
         console.log(`Brand: ${this.#brand}, Model: ${this.#model}, Run: ${this.#run}`)
     }
 }
+
+// 12-promise-race
+
+const getProduct = (id) => {
+    return fetch(`https://dummyjson.com/products/${id}`)
+    .then(res => res.json())
+    .catch(error => new Error(error.message))
+}
+
+const race = (promises) => {
+    if (!Array.isArray(promises)) return new Promise((resolve, reject) => {
+        reject(new Error('Argument promises is not iterable'))
+    })
+    
+    if (!promises.length) return new Promise((resolve, reject) => {
+        reject(new Error('Promise list is empty'))
+    })
+
+    return new Promise((resolve, reject) => {
+        for (const promise of promises) {
+            promise.then(resolve, reject);
+        }
+    })
+}
+
+race([
+    getProduct(1),
+    getProduct(2),
+    getProduct(3)
+]).then(data => {
+    console.log(data)
+}).catch(error => {
+    console.log(error)
+})

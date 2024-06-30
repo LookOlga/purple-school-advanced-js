@@ -212,3 +212,46 @@ class ElfClass extends CharacterClass {
         console.log(`${this.name} speaks in ${this.language} ${secondLanguage ? 'and ' + secondLanguage : ''}`)
     }
 }
+
+// 8-solid
+
+class Billing {
+    constructor(amount) {
+        this.amount = amount
+    }
+
+    calculateTotal() {
+        return this.amount
+    }
+}
+
+class FixedBilling extends Billing {
+    constructor(amount) {
+        super(amount)
+    }
+}
+
+class HourBilling extends Billing {
+    constructor(amount, hours) {
+        super(amount)
+        this.hours = hours
+    }
+
+    calculateTotal() {
+        return this.amount * this.hours
+    }
+}
+
+class ItemBilling extends Billing {
+    constructor(amount, itemsCount) {
+        super(amount)
+        this.itemsCount = itemsCount
+    }
+
+    calculateTotal() {
+        return this.amount * this.itemsCount
+    }
+}
+
+
+

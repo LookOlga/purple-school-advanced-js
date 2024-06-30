@@ -81,7 +81,7 @@ const setTimer = () => {
     }
 }
 
-setTimer()
+// setTimer()
 
 // 5-oop
 
@@ -294,4 +294,24 @@ const loadPokemonDescription = () => {
 }
 
 loadPokemonDescription()
+
+// 11-geolocation
+
+const getCurrentPosition = () => {
+    return new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(position => {
+            if (!position) reject('Geolocation is unknown')
+            resolve(position)
+        })        
+    }) 
+}
+
+getCurrentPosition()
+    .then(response => {
+        const { coords } = response
+        console.log(`Latitude: ${coords.latitude}, longitude: ${coords.longitude}`);
+    })
+    .catch(error => {
+        console.warn(error.message)
+    })
 

@@ -147,6 +147,112 @@ class Car {
     }
 }
 
+// 7-oop-in-class
+
+class CharacterClass {
+    constructor({
+        race,
+        name,
+        language
+    }) {
+        this.race = race
+        this.name = name
+        this.language = language
+    }
+
+    speak() {
+        console.log(`Native language: ${this.language}`)
+    }
+}
+
+class OrkClass extends CharacterClass {
+    constructor({
+        race,
+        name,
+        language,
+        weapon
+    }) {
+        super({
+            race,
+            name,
+            language
+        })
+        this.weapon = weapon
+    }
+
+    beat() {
+        console.log(`Beat with ${this.weapon}`)
+    }
+
+    speak() {
+        console.log(`${this.name} speaks in ${this.language}`)
+    }
+}
+
+class ElfClass extends CharacterClass {
+    constructor({
+        race,
+        name,
+        language,
+        spellType
+    }) {
+        super({
+            race,
+            name,
+            language
+        })
+        this.spellType = spellType
+    }
+
+    spell() {
+        console.log(`Spell ${this.spellType}`)
+    }
+
+    speak(secondLanguage = null) {
+        console.log(`${this.name} speaks in ${this.language} ${secondLanguage ? 'and ' + secondLanguage : ''}`)
+    }
+}
+
+// 8-solid
+
+class Billing {
+    constructor(amount) {
+        this.amount = amount
+    }
+
+    calculateTotal() {
+        return this.amount
+    }
+}
+
+class FixedBilling extends Billing {
+    constructor(amount) {
+        super(amount)
+    }
+}
+
+class HourBilling extends Billing {
+    constructor(amount, hours) {
+        super(amount)
+        this.hours = hours
+    }
+
+    calculateTotal() {
+        return this.amount * this.hours
+    }
+}
+
+class ItemBilling extends Billing {
+    constructor(amount, itemsCount) {
+        super(amount)
+        this.itemsCount = itemsCount
+    }
+
+    calculateTotal() {
+        return this.amount * this.itemsCount
+    }
+}
+
 // 9-pokemon
 
 const BASE_URL = 'https://pokeapi.co/api/v2/'
@@ -188,3 +294,4 @@ const loadPokemonDescription = () => {
 }
 
 loadPokemonDescription()
+

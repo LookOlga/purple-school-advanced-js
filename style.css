@@ -6,17 +6,24 @@
 
 body {
     font-family: 'Poppins', sans-serif;
+    background-color: #333;
+    color: #fff;
 }
 
-.timer {
+.block {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background-color: #333;
-    color: #fff;
-    padding: 15px;
+    flex-direction: column;
+    padding: 150px 15px;
 }
+
+.title {
+    font-size: 48px;
+    color: goldenrod;
+    margin-bottom: 30px;
+}
+
 
 .timer-content {
     font-size: 36px;
@@ -30,4 +37,29 @@ body {
         font-size: 60px;
         font-weight: 800;
     }
+}
+
+.buttons__wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.buttons__counter {
+    font-size: 30px;
+}
+
+.buttons__btn {
+    font-size: 18px;
+    padding: 12px;
+    background-color: goldenrod;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.buttons__btn.clicked {
+    background-color: green;
 }

@@ -259,7 +259,7 @@ const BASE_URL = 'https://pokeapi.co/api/v2/'
 const language = 'en'
 
 const checkRequestStatus = (result, message) => {
-    if(result.status !== 200) throw new Error(message)
+    if (result.status !== 200) throw new Error(message)
 }
 
 const getAbilityDescription = (event) => {
@@ -267,7 +267,7 @@ const getAbilityDescription = (event) => {
     checkRequestStatus(result, 'Error in getAbilityDescription request')
     const response = JSON.parse(result.response) 
     const engDescription = response.effect_entries.find(item => item.language.name === language).effect
-    if(!engDescription) return
+    if (!engDescription) return
     console.log(engDescription)
 }
 
@@ -286,7 +286,7 @@ const loadPokemonDescription = () => {
     xhr.addEventListener('load', function(firstEvent) {
     
         const abilityURL = getPokemonAbilityURL(firstEvent)
-        if(!abilityURL) return
+        if (!abilityURL) return
         xhr.open('GET', abilityURL)
         xhr.send()
         xhr.addEventListener('load', getAbilityDescription)
@@ -295,3 +295,35 @@ const loadPokemonDescription = () => {
 
 loadPokemonDescription()
 
+// 13-buttons
+
+const buttonsWrapper = document.querySelector('.buttons__wrapper'),
+      buttonsClickCounter = document.querySelector('.buttons__counter')
+let counter = Number(buttonsClickCounter.textContent)
+
+const createButtons = (quantity) => {
+    for (let i = 0; i < quantity; i++) {
+        const button = document.createElement('button')
+        button.classList.add('buttons__btn')
+        button.textContent = 'Click me'
+        buttonsWrapper.append(button)
+    }
+
+    return document.querySelectorAll('.buttons__btn')
+}
+
+const buttons = createButtons(5)
+
+buttonsWrapper.addEventListener('click', (e) => {
+    buttons.forEach(button => {
+        button.classList.remove('clicked')
+        button.textContent = 'Click me'
+    })
+
+    const target = e.target
+    if (target.tagName === 'BUTTON' && target.className === 'buttons__btn') {
+        target.textContent = 'Clicked!'
+        target.classList.add('clicked')
+        buttonsClickCounter.textContent = ++counter
+    }
+})

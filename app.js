@@ -147,6 +147,154 @@ class Car {
     }
 }
 
+// 7-oop-in-class
+
+class CharacterClass {
+    constructor({
+        race,
+        name,
+        language
+    }) {
+        this.race = race
+        this.name = name
+        this.language = language
+    }
+
+    speak() {
+        console.log(`Native language: ${this.language}`)
+    }
+}
+
+class OrkClass extends CharacterClass {
+    constructor({
+        race,
+        name,
+        language,
+        weapon
+    }) {
+        super({
+            race,
+            name,
+            language
+        })
+        this.weapon = weapon
+    }
+
+    beat() {
+        console.log(`Beat with ${this.weapon}`)
+    }
+
+    speak() {
+        console.log(`${this.name} speaks in ${this.language}`)
+    }
+}
+
+class ElfClass extends CharacterClass {
+    constructor({
+        race,
+        name,
+        language,
+        spellType
+    }) {
+        super({
+            race,
+            name,
+            language
+        })
+        this.spellType = spellType
+    }
+
+    spell() {
+        console.log(`Spell ${this.spellType}`)
+    }
+
+    speak(secondLanguage = null) {
+        console.log(`${this.name} speaks in ${this.language} ${secondLanguage ? 'and ' + secondLanguage : ''}`)
+    }
+}
+
+// 8-solid
+
+class Billing {
+    constructor(amount) {
+        this.amount = amount
+    }
+
+    calculateTotal() {
+        return this.amount
+    }
+}
+
+class FixedBilling extends Billing {
+    constructor(amount) {
+        super(amount)
+    }
+}
+
+class HourBilling extends Billing {
+    constructor(amount, hours) {
+        super(amount)
+        this.hours = hours
+    }
+
+    calculateTotal() {
+        return this.amount * this.hours
+    }
+}
+
+class ItemBilling extends Billing {
+    constructor(amount, itemsCount) {
+        super(amount)
+        this.itemsCount = itemsCount
+    }
+
+    calculateTotal() {
+        return this.amount * this.itemsCount
+    }
+}
+
+// 9-pokemon
+
+const BASE_URL = 'https://pokeapi.co/api/v2/'
+const language = 'en'
+
+const checkRequestStatus = (result, message) => {
+    if(result.status !== 200) throw new Error(message)
+}
+
+const getAbilityDescription = (event) => {
+    const result = event.target
+    checkRequestStatus(result, 'Error in getAbilityDescription request')
+    const response = JSON.parse(result.response) 
+    const engDescription = response.effect_entries.find(item => item.language.name === language).effect
+    if(!engDescription) return
+    console.log(engDescription)
+}
+
+const getPokemonAbilityURL = (event) => {
+    const result = event.target
+    checkRequestStatus(result, 'Error in getPokemonAbilityURL request')
+    const response = JSON.parse(result.response)
+    const abilityItem = response.abilities && response.abilities.length ? response.abilities[0] : {}
+    return abilityItem?.ability?.url
+}
+
+const loadPokemonDescription = () => {
+    const xhr = new XMLHttpRequest()
+    xhr.open('GET', `${BASE_URL}pokemon/ditto`)
+    xhr.send()
+    xhr.addEventListener('load', function(firstEvent) {
+    
+        const abilityURL = getPokemonAbilityURL(firstEvent)
+        if(!abilityURL) return
+        xhr.open('GET', abilityURL)
+        xhr.send()
+        xhr.addEventListener('load', getAbilityDescription)
+    })
+}
+
+loadPokemonDescription()
+
 // 11-geolocation
 
 const getCurrentPosition = () => {
@@ -166,3 +314,4 @@ getCurrentPosition()
     .catch(error => {
         console.warn(error.message)
     })
+

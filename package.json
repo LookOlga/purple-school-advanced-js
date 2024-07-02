@@ -1,0 +1,24 @@
+{
+  "name": "purple-school-advanced",
+  "version": "1.0.0",
+  "description": "JavaScript training project",
+  "main": "index.js",
+  "scripts": {
+    "build": "rollup index.js --file bundle.js --format iife",
+    "start": "live-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LookOlga/purple-school-advanced-js.git"
+  },
+  "author": "Lukina Olga",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LookOlga/purple-school-advanced-js/issues"
+  },
+  "homepage": "https://github.com/LookOlga/purple-school-advanced-js#readme",
+  "dependencies": {
+    "live-server": "^1.2.2",
+    "rollup": "^4.18.0"
+  }
+}

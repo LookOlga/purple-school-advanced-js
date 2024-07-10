@@ -256,7 +256,7 @@ class ItemBilling extends Billing {
 // 9-pokemon
 
 const BASE_URL = 'https://pokeapi.co/api/v2/'
-const language = 'en'
+const LANGUAGE = 'en'
 
 const checkRequestStatus = (result, message) => {
     if(result.status !== 200) throw new Error(message)
@@ -266,7 +266,7 @@ const getAbilityDescription = (event) => {
     const result = event.target
     checkRequestStatus(result, 'Error in getAbilityDescription request')
     const response = JSON.parse(result.response) 
-    const engDescription = response.effect_entries.find(item => item.language.name === language).effect
+    const engDescription = response.effect_entries.find(item => item.language.name === LANGUAGE).effect
     if(!engDescription) return
     console.log(engDescription)
 }
@@ -294,4 +294,27 @@ const loadPokemonDescription = () => {
 }
 
 loadPokemonDescription()
+
+// 10-pokemon-promise
+
+const getPokemonData = (url, errorMessage, method = 'GET') => {
+    return fetch(url, {
+        method
+    }).then(response => {
+        if(!response.ok) return new Error(`${errorMessage}: ${response.status}`)
+        return response.json()
+    })
+}
+
+getPokemonData(`${BASE_URL}pokemon/ditto`, 'Cannot get pokemon data')
+    .then(data => {
+        const { url } = data.abilities[0].ability
+        return getPokemonData(url, 'Cannot get pokemon description data')
+    })
+    .then(result => {
+        const engDescription = result.effect_entries.find(item => item.language.name === LANGUAGE).effect
+        console.log(engDescription)
+    }).catch(error => {
+        console.warn(error)
+    })
 

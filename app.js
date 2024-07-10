@@ -315,6 +315,6 @@ getPokemonData(`${BASE_URL}pokemon/ditto`, 'Cannot get pokemon data')
         const engDescription = result.effect_entries.find(item => item.language.name === LANGUAGE).effect
         console.log(engDescription)
     }).catch(error => {
-        return error
+        console.warn(error)
     })
 

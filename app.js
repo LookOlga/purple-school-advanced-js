@@ -266,13 +266,8 @@ const getAbilityDescription = (event) => {
     const result = event.target
     checkRequestStatus(result, 'Error in getAbilityDescription request')
     const response = JSON.parse(result.response) 
-<<<<<<< HEAD
-    const engDescription = response.effect_entries.find(item => item.language.name === language).effect
-    if (!engDescription) return
-=======
     const engDescription = response.effect_entries.find(item => item.language.name === LANGUAGE).effect
-    if(!engDescription) return
->>>>>>> 6ac28582fb718c4fbeec20467d69c9de819df390
+    if (!engDescription) return
     console.log(engDescription)
 }
 
